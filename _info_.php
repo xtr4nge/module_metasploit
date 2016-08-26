@@ -1,6 +1,6 @@
 <?php
 $mod_name="metasploit";
-$mod_version="1.0";
+$mod_version="1.1";
 $mod_path="/usr/share/fruitywifi/www/modules/$mod_name";
 $mod_logs="$log_path/$mod_name.log"; 
 $mod_logs_history="$mod_path/includes/logs/";
