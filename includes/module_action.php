@@ -59,8 +59,11 @@ if($service == $mod_name) {
         exec_fruitywifi($exec);
 		
 		//$exec = "screen -d -m $bin_msfconsole -a -r handler.rc";
-		$exec = "tmux new -s METASPLOIT -d '$bin_msfconsole -r handler.rc'";
-        exec_fruitywifi($exec);
+		//$exec = "tmux new -s METASPLOIT -d '$bin_msfconsole -r handler.rc'";
+		$exec = "systemctl start tmux@METASPLOIT";
+		exec_fruitywifi($exec);
+		$exec = "tmux send-keys -t METASPLOIT C-z 'msfconsole -r /usr/share/fruitywifi/www/modules/metasploit/includes/handler.rc' C-m";
+		exec_fruitywifi($exec);
 		
     } else if($action == "stop") {
 	
@@ -70,7 +73,9 @@ if($service == $mod_name) {
 		
 		$exec = "kill " . $output[0];
 		exec_fruitywifi($exec);
-	
+	    $exec = "systemctl stop tmux@METASPLOIT";
+	    exec_fruitywifi($exec);
+		
 		// COPY LOG
         if ( 0 < filesize( $mod_logs ) ) {
             $exec = "cp $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
